@@ -1,0 +1,1 @@
+export const mainPath = 'http://localhost:8000';

@@ -1,0 +1,15 @@
+.App {
+    height: 100%;
+    overflow: scroll;
+    font-family: var(--main-font);
+    line-height: 1.5rem;
+    font-size: 1.1rem;
+    background-color: var(--bg);
+}
+
+.wrapper {
+    max-width: 1185px;
+    padding: 0 1rem 2.5rem 1rem; 
+    margin: 0 auto;
+}
+

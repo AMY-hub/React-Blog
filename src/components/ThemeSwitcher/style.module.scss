@@ -1,0 +1,41 @@
+.theme_switcher {
+    display: flex;
+    align-items: stretch;
+    
+    &__light,&__dark {
+        cursor: pointer;
+        padding: 0.2em;
+        border: 2px solid var(--dark-text);
+        border-radius: 0.3rem;
+
+        &::after {
+            display: inline-block;
+            padding: 0.1rem;
+            font-size: 1.5rem;
+            text-align: center;
+            vertical-align: middle;
+            color: var(--dark-text);
+        }
+
+        &:hover {
+            text-shadow: 0 0 0.8em var(--accent-first);
+        }
+    }
+
+    &__light {
+       border-top-right-radius: 0; 
+       border-bottom-right-radius: 0;
+    }
+
+    &__dark {
+        border-top-left-radius: 0; 
+        border-bottom-left-radius: 0;
+        border-left: none; 
+        padding-left: 4px;
+     }
+
+     .active::after {
+        color: var(--accent-first);
+        text-shadow: 0 0 0.8em var(--accent-first);
+     }
+}

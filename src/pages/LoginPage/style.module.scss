@@ -1,0 +1,89 @@
+.login {
+    max-width: 450px;
+    margin: 0 auto;
+    padding: 3rem;
+    border-radius: 0.3rem;
+    background-color: var(--content-bg);
+    box-shadow: var(--content-shadow);
+}
+
+.options {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 0.3rem;
+    background-color: var(--content-bg-light);
+
+    .options__signin,.options__signup{
+        display: inline-block;
+        padding: 1rem;
+        font-size: 1.6rem;
+        font-weight: 500;
+        color: var(--dark-text);
+    }
+
+    .options__signin.active {
+        color: var(--accent-second-contrast);
+        &::after {
+            content: '';
+            margin-top: 0.2rem;
+            display: block;
+            height: 0.1rem;
+            width: 6.5rem;
+            background-color: var(--accent-second-contrast);
+        }
+    }
+
+    .options__signup.active {
+        color: var(--accent-first);
+        &::after {
+            content: '';
+            margin-top: 0.2rem;
+            display: block;
+            height: 0.1rem;
+            width: 6.5rem;
+            background-color: var(--accent-first);
+        }
+    }
+}
+
+.login__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem;
+
+    p {
+        font-size: 1.2rem;
+    }
+
+    input {
+        font-size: 1rem;
+        padding: 0.5rem;
+        color: var(--bright-text);
+        background-color: var(--content-bg-light);
+        border: 2px solid var(--dark-text);
+        border-radius: 0.3rem;
+    
+        &:focus {
+            border: 2px solid var(--main-text);
+        }
+    }
+}
+
+.login__submit {
+    display: inline-block;
+    padding: 0.3em 1.4em;
+    margin-top: 1rem;
+    border-radius: 0.3em;
+    font-size: 1.2rem;
+    color: var(--bright-text);
+    background-color: var(--accent-second);
+    transition: all 500ms;
+
+    &:hover,&:focus {
+        box-shadow: 0 0 0.8em var(--accent-second);
+    }
+}
