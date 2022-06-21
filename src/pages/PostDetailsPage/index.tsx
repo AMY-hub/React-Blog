@@ -6,6 +6,8 @@ import { mainPath } from '../../consts/path';
 import { useFetch } from '../../hooks/useFetch';
 import { IPost } from '../../types/types';
 
+import parse from 'html-react-parser';
+
 import styles from './style.module.scss';
 
 export const PostDetailsPage = () => {
@@ -22,7 +24,7 @@ export const PostDetailsPage = () => {
             {post && (
                 <article className={styles.post}>
                     <h2 className={styles.post__title}>{post.title}</h2>
-                    <p className={styles.post__body}>{post.body}</p>
+                    <div className={styles.post__body}>{parse(post.body)}</div>
                     <PostFooter
                         author={post.author}
                         topics={post.topics}

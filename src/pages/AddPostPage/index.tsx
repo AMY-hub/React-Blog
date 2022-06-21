@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ErrorMessage } from '../../components/ErrorMessage';
+import { TextEditor } from '../../components/TextEditor';
 import { mainPath } from '../../consts/path';
 import createKey from '../../utils/createKey';
 import styles from './style.module.scss';
@@ -7,7 +8,7 @@ import styles from './style.module.scss';
 export const AddPostPage = () => {
 
     const [title, setTitle] = useState<string>('');
-    const [body, setBody] = useState<string>('');
+    const [bodyHTML, setBodyHTML] = useState<string>('');
     const [topics, setTopics] = useState<Array<string> | null>(null);
     const [isPending, setPending] = useState<boolean>(false);
     const [isError, setIsError] = useState<string | null>(null);
@@ -23,7 +24,8 @@ export const AddPostPage = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const post = { title, body, topics, author: 'Amy' };
+
+        const post = { title, body: bodyHTML, topics, author: 'Amy' };
         setPending(true);
 
         fetch(mainPath + '/posts', {
@@ -45,25 +47,18 @@ export const AddPostPage = () => {
     return (
         <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.form__fields}>
-                <label className={styles.form__label}>
-                    <p>Title of your post:</p>
+                <label>
+                    <p className={styles.form__name}>Title of your post:</p>
                     <input type='text'
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         placeholder='Your title here'
                         className={styles.form__title} />
                 </label>
+                <p className={styles.form__name}>Text of your post:</p>
+                <TextEditor bodyHTML={bodyHTML} setBodyHTML={setBodyHTML} />
                 <label className={styles.form__label}>
-                    <p>Text of your post:</p>
-                    <textarea
-                        value={body}
-                        onChange={(e) => setBody(e.target.value)}
-                        placeholder='Your text here'
-                        className={styles.form__body}
-                        rows={15} />
-                </label>
-                <label className={styles.form__label}>
-                    <p>Choose theme:
+                    <p className={styles.form__name}>Choose theme:
                         {topics &&
                             topics.map(topic => <span
                                 key={createKey()}

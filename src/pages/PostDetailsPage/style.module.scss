@@ -6,11 +6,16 @@
 }
 
 .post {
+    width: 90%;
     padding: 2rem;
     color: var(--main-text);
     background-color: var(--content-bg);
     box-shadow: var(--content-shadow);
     border-radius: 0.5rem;
+
+    ul, li {
+        margin-left: 1.5rem;
+    }
 
     &__title {
         margin-bottom: 1.5rem;

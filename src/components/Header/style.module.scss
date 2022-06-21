@@ -47,8 +47,9 @@
     font-weight: 500;
     background-color: var(--accent-first);
     box-shadow: 0 0 0 0.2em var(--pale-accent-first);
+    transition: all 500ms;
 
-    &:hover {
+    &:hover,&:focus {
         box-shadow: 0 0 5px 0.35em var(--pale-accent-first);
     }
 }

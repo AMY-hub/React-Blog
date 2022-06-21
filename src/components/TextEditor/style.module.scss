@@ -1,0 +1,24 @@
+.texteditor {
+    background-color: var(--content-bg-light);
+    min-height: 25rem;
+    border: 2px solid var(--dark-text);
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    font-size: 1rem;
+    color: var(--main-text);
+
+    p[data-placeholder]:first-child::before {
+        content: attr(data-placeholder);
+        font-size: 1rem;
+        color: var(--dark-text);
+    }
+
+    ul, ol {
+        margin-left: 1.5rem;
+    }
+
+    code {
+        font-family: 'Courier New', Courier, monospace;
+        color: var(--accent-second-contrast)
+    }
+}

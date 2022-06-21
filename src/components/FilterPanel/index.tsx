@@ -1,24 +1,30 @@
+import { useContext } from 'react';
+import { useFetch } from '../../hooks/useFetch';
+import { IAppContext } from '../../types/types';
 import createKey from '../../utils/createKey';
+import { AppContext } from '../App/App';
 import { Button } from '../Button';
 import styles from './style.module.scss';
 
-interface FilterProps {
-    selectedPosts: string,
-    setSelectedPosts: React.Dispatch<React.SetStateAction<string>>
-}
 
-export const FilterPanel: React.FC<FilterProps> = (
-    { selectedPosts, setSelectedPosts }) => {
+export const FilterPanel: React.FC = () => {
 
-    const options = ['Latest posts', 'All posts', 'CSS posts', 'JavaScript posts', 'HTML posts'];
+    const { filter, setFilter } = useContext(AppContext) as IAppContext;
+
+    const options = [
+        'all',
+        'css',
+        'javascript',
+        'html'
+    ];
 
     const optList = options.map(opt => {
 
         return (<li key={createKey()}>
             <Button
                 text={opt}
-                onclick={() => setSelectedPosts(opt)}
-                class={selectedPosts === opt ?
+                onclick={() => setFilter(opt)}
+                class={filter === opt ?
                     `${styles.filter__btn} ${styles.filter__btn_active}`
                     : styles.filter__btn}
             />

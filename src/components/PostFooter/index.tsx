@@ -13,7 +13,7 @@ export const PostFooter = ({ author, topics, date }: IPostFooterProps) => {
             <div>
                 <span>{`Author: ${author}`}</span>
                 <br />
-                <span>{`Topics: ${topics.join(', ')}`}</span>
+                <span>{`Topics: ${topics}`}</span>
             </div>
             <span>{`Date: ${getDateString(date)}`}</span>
         </div>

@@ -1,5 +1,5 @@
 .form {
-    max-width: 75%;
+    max-width: 85%;
     margin: 0 auto;
     padding: 2rem;
     background: var(--content-bg);
@@ -12,14 +12,11 @@
     flex-direction: column;
 }
 
-.form__label {
+.form__name {
     font-size: 1.2rem;
-    margin-bottom: 1.4rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
     color: var(--main-text);
-
-    p {
-        margin-bottom: 0.5rem;
-    }
 }
 
 .form__title {

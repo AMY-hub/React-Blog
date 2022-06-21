@@ -1,4 +1,4 @@
-import { createContext } from 'react';
+import { useState, createContext, useEffect, useLayoutEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useFetch } from '../../hooks/useFetch';
 
@@ -22,17 +22,36 @@ export const AppContext = createContext<IAppContext | null>(null);
 export function App() {
 
   const [theme, setTheme] = useLocalStorage('blogTheme', 'dark');
-  // const [posts, setPosts] = useState<IPost[] | null>(null);
+  const [selectedPosts, setSelectedPosts] = useState<Array<IPost>>([]);
+  const [filter, setFilter] = useState<string>('all');
 
   const { data, error } = useFetch(mainPath + '/posts');
-  const posts = data as IPost[];
+  const allPosts = data as IPost[];
+  console.log(allPosts);
+
+  useLayoutEffect(() => {
+    if (filter !== 'all') {
+      console.log('ALL', allPosts);
+
+      const filtered = allPosts.filter(post => post.topics.includes(filter));
+      console.log('NOW:', filtered);
+
+      setSelectedPosts(filtered);
+    } else {
+      setSelectedPosts(allPosts);
+    }
+  }, [filter, data])
 
   return (
     <BrowserRouter>
       <AppContext.Provider value={{
-        posts: posts,
-        theme: theme,
-        setTheme: setTheme
+        allPosts,
+        selectedPosts,
+        setSelectedPosts,
+        theme,
+        setTheme,
+        filter,
+        setFilter
       }}>
         <div className={`App theme-${theme === 'dark' ? 'dark' : 'light'}`}>
           <div className='wrapper'>

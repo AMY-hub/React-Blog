@@ -2,9 +2,13 @@
 export type Theme = 'light' | 'dark';
 
 export interface IAppContext {
-    posts: IPost[] | null,
+    allPosts: IPost[],
+    selectedPosts: IPost[],
+    setSelectedPosts: React.Dispatch<React.SetStateAction<IPost[]>>,
     theme: string,
-    setTheme: (theme: Theme) => void;
+    setTheme: React.Dispatch<any>,
+    filter: string,
+    setFilter: React.Dispatch<React.SetStateAction<string>>
 }
 
 export interface IPost {
@@ -15,4 +19,3 @@ export interface IPost {
     createdAt: number,
     id: number
 }
-

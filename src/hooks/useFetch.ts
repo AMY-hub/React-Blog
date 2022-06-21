@@ -9,13 +9,13 @@ export interface IRespInfo {
 export const useFetch = (url: string, state?: any): IRespInfo => {
 
     const [data, setData] = useState<unknown>(null);
-    const [loading, setLoading] = useState<boolean>(true);
+    const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
 
+    useEffect(() => {
+        const abortController = new AbortController();
+        setLoading(true);
 
-    const abortController = new AbortController();
-
-    const getData = () => {
         fetch(url, {
             signal: abortController.signal
         })
@@ -23,26 +23,22 @@ export const useFetch = (url: string, state?: any): IRespInfo => {
                 if (res.ok !== true) {
                     throw new Error('Could not load data from this resourse');
                 } else {
-                    return res.json()
+                    return res.json();
                 }
             })
             .then(data => {
                 setData(data);
                 setError(null);
-                setLoading(false);
             })
             .catch((err: Error) => {
-                if (err.name === 'AbortError') {
-                    return () => abortController.abort();
-                }
                 setError(err.message);
+            })
+            .finally(() => {
                 setLoading(false);
             })
-    }
+        return () => abortController.abort();
 
-    useEffect(() => {
-        getData();
-    }, [state])
+    }, [url])
 
     return { data, loading, error };
 }
