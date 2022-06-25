@@ -1,17 +1,14 @@
 import styles from './style.module.scss';
 
-interface IbtpProps {
-    class?: string,
-    text?: string,
-    onclick: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
-}
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const Button: React.FC<IbtpProps> = (props) => {
+export const Button: React.FC<ButtonProps> = ({ className, onClick, children, ...rest }) => {
     return (
         <button
-            className={`${props.class || ''} ${styles.btn}`}
-            onClick={props.onclick}>
-            {props.text || ''}
+            className={`${className || ''} ${styles.btn}`}
+            onClick={onClick}
+            {...rest}>
+            {children}
         </button>
     )
 }

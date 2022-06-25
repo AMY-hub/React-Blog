@@ -1,20 +1,31 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AppContext } from '../../components/App/App';
 import { ErrorMessage } from '../../components/ErrorMessage';
+import { SubmitButton } from '../../components/SubmitButton';
 import { TextEditor } from '../../components/TextEditor';
 import { mainPath } from '../../consts/path';
+import { IAppContext } from '../../types/types';
 import createKey from '../../utils/createKey';
+import { validatePostData } from '../../utils/validatePostData';
+
 import styles from './style.module.scss';
 
 export const AddPostPage = () => {
-
     const [title, setTitle] = useState<string>('');
     const [bodyHTML, setBodyHTML] = useState<string>('');
-    const [topics, setTopics] = useState<Array<string> | null>(null);
+    const [previewHTML, setPreviewHTML] = useState<string>('');
+    const [topics, setTopics] = useState<Array<string>>([]);
     const [isPending, setPending] = useState<boolean>(false);
     const [isError, setIsError] = useState<string | null>(null);
 
-    const onChangeTopic = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const selectedOptions = event.currentTarget.selectedOptions;
+    const { user } = useContext(AppContext) as IAppContext;
+
+    const navigate = useNavigate();
+
+    const onChangeTopic: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
+
+        const selectedOptions = e.currentTarget.selectedOptions;
         const newTopics = [];
         for (let i = 0; i < selectedOptions.length; i++) {
             newTopics.push(selectedOptions[i].value);
@@ -22,25 +33,41 @@ export const AddPostPage = () => {
         setTopics(newTopics);
     }
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
-
-        const post = { title, body: bodyHTML, topics, author: 'Amy' };
         setPending(true);
-
-        fetch(mainPath + '/posts', {
+        const post = {
+            title: title,
+            body: bodyHTML,
+            preview: previewHTML,
+            topics,
+            author: user?.name,
+            userId: user?.id
+        };
+        const validate = validatePostData(post);
+        if (validate.invalid) {
+            setIsError('Fill in all the fields!');
+            setPending(false);
+            return;
+        }
+        fetch(mainPath + `/posts`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${user?.accessToken}`
+            },
             body: JSON.stringify(post)
         }).then(res => {
             console.log(res);
             if (res.ok === true) {
                 setPending(false);
+                navigate('/successfully')
             } else {
-                throw new Error(`Error: couldn't create post`)
+                throw new Error(`Error: couldn't create post`);
             }
         }).catch((err: Error) => {
             setIsError(err.message);
+            setPending(false)
         })
     }
 
@@ -56,7 +83,12 @@ export const AddPostPage = () => {
                         className={styles.form__title} />
                 </label>
                 <p className={styles.form__name}>Text of your post:</p>
-                <TextEditor bodyHTML={bodyHTML} setBodyHTML={setBodyHTML} />
+                <TextEditor
+                    bodyHTML={bodyHTML}
+                    setBodyHTML={setBodyHTML}
+                    previewHTML={previewHTML}
+                    setPreviewHTML={setPreviewHTML}
+                />
                 <label className={styles.form__label}>
                     <p className={styles.form__name}>Choose theme:
                         {topics &&
@@ -75,16 +107,14 @@ export const AddPostPage = () => {
                 </label>
             </div>
             {isError &&
-                <ErrorMessage text={isError} />}
-            {isPending ?
-                <button disabled type='submit' className={styles.form__submit}>
-                    Create post
-                </button>
-                :
-                <button type='submit' className={styles.form__submit}>
-                    Create post
-                </button>
+                <ErrorMessage text={isError} />
             }
+            <SubmitButton
+                loading={isPending}
+                className={styles.form__submit}
+            >
+                Create Post
+            </SubmitButton>
         </form>
     )
 }

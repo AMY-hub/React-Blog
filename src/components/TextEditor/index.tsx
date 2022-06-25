@@ -5,14 +5,25 @@ import Placeholder from "@tiptap/extension-placeholder";
 import { TextEditorMenu } from "./TextEditorMenu";
 
 import styles from './style.module.scss';
-import { useState } from "react";
 
 interface IEditorProps {
     bodyHTML: string,
-    setBodyHTML: React.Dispatch<React.SetStateAction<string>>
+    setBodyHTML: React.Dispatch<React.SetStateAction<string>>,
+    previewHTML: string,
+    setPreviewHTML: React.Dispatch<React.SetStateAction<string>>
 }
 
-export const TextEditor = ({ bodyHTML, setBodyHTML }: IEditorProps) => {
+export const TextEditor = ({ bodyHTML, setBodyHTML, previewHTML, setPreviewHTML }: IEditorProps) => {
+
+    const prevEditor = useEditor({
+        extensions: [
+            StarterKit,
+            Placeholder.configure({
+                placeholder: 'Write preview for your post...'
+            })
+        ],
+        onUpdate: ({ editor }) => setPreviewHTML(editor.getHTML()),
+    })
 
     const editor = useEditor({
         extensions: [
@@ -28,8 +39,12 @@ export const TextEditor = ({ bodyHTML, setBodyHTML }: IEditorProps) => {
 
     return (
         <div className={styles.texteditor}>
+            <TextEditorMenu editor={prevEditor} />
+            <EditorContent editor={prevEditor}
+                className={styles.texteditor__previewfield} />
             <TextEditorMenu editor={editor} />
-            <EditorContent editor={editor} />
+            <EditorContent editor={editor}
+                className={styles.texteditor__textfield} />
         </div>
 
     )

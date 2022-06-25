@@ -79,13 +79,12 @@
     background-color: var(--accent-second);
     transition: all 500ms;
 
-    &:disabled {
-        background-color:var(--pale-accent-second);
-        color: #c3c3c3;
-    }
-
     &:hover,&:focus {
         box-shadow: 0 0 0.8em var(--accent-second);
+    }
+
+    &:disabled {
+        opacity: 0.6;
     }
 }
 

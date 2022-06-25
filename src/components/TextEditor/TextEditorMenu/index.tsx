@@ -101,15 +101,6 @@ export const TextEditorMenu = ({ editor }: IMenuProps) => {
                     editor.chain().focus().setHardBreak().run()
                 }}
             >hard break</button>
-            <div className={styles.cancel}>
-                <button onClick={() => editor.chain().focus().undo().run()}>
-                    undo
-                </button>
-                <button onClick={() => editor.chain().focus().redo().run()}>
-                    redo
-                </button>
-            </div>
-
         </div>
     )
 }

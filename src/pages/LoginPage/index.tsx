@@ -1,52 +1,35 @@
 import { useState } from 'react';
 import { Button } from '../../components/Button';
+import { SighInForm } from '../../components/SignInForm';
+import { SighUpForm } from '../../components/SignUpForm';
 import styles from './style.module.scss';
 
 export const LoginPage = () => {
     const [option, setOption] = useState<'signin' | 'signup'>('signin');
 
-    const handleSubmit = () => {
-        console.log("Submit");
-    }
-
     return (
         <section className={styles.login}>
             <div className={styles.options}>
                 <Button
-                    class={`${option === 'signup' ?
+                    className={`${option === 'signup' ?
                         styles.options__signin
                         : styles.options__signin + ' ' + styles.active}`}
-                    text='Sign in'
-                    onclick={() => setOption('signin')}
-                />
+                    onClick={() => setOption('signin')}
+                >Sign in
+                </Button>
                 <Button
-                    class={`${option === 'signin' ?
+                    className={`${option === 'signin' ?
                         styles.options__signup
                         : styles.options__signup + ' ' + styles.active}`}
-                    text='Sign up'
-                    onclick={() => setOption('signup')}
-                />
+                    onClick={() => setOption('signup')}
+                >Sign up</Button>
             </div>
-            <form onSubmit={handleSubmit}
-                className={styles.login__form}>
-                {option === 'signup' &&
-                    <label>
-                        <p>Enter your name:</p>
-                        <input type='text'></input>
-                    </label>
-                }
-                <label>
-                    <p>Enter your email:</p>
-                    <input type='email'></input>
-                </label>
-                <label>
-                    <p>Enter your password:</p>
-                    <input type='password'></input>
-                </label>
-                <button type='submit' className={styles.login__submit}>
-                    {option === 'signup' ? 'Sign up' : 'Sign in'}
-                </button>
-            </form>
+            {
+                option === 'signin' ?
+                    <SighInForm />
+                    :
+                    <SighUpForm />
+            }
         </section>
     )
 }

@@ -22,3 +22,14 @@
         color: var(--accent-second-contrast)
     }
 }
+
+.texteditor__textfield {
+    padding: 1rem;
+    min-height: 15rem;
+}
+
+.texteditor__previewfield {
+    padding: 1rem;
+    min-height: 8rem;
+    border-bottom: 2px solid var(--dark-text);
+}

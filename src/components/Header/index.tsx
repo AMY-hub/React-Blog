@@ -4,8 +4,15 @@ import styles from './style.module.scss';
 import { ReactComponent as Logo } from '../../images/web.svg';
 import { ThemeSwitcher } from '../ThemeSwitcher';
 import { Link } from 'react-router-dom';
+import { IAppContext } from '../../types/types';
+import { AppContext } from '../App/App';
+import { useContext } from 'react';
+import { Button } from '../Button';
 
-export function Header(): JSX.Element {
+export const Header: React.FC = () => {
+
+    const { user, setUser } = useContext(AppContext) as IAppContext;
+
     return (
         <header className={styles.header}>
             <div className={styles.header__logo}>
@@ -16,12 +23,18 @@ export function Header(): JSX.Element {
             </div>
             <div className={styles.header__options}>
                 <ThemeSwitcher />
-                <Link
-                    to='/login'
-                    className={styles.login_link}
-                >Login</Link>
+                {user ?
+                    <Button
+                        onClick={() => setUser(null)}
+                        className={styles.logout_btn}
+                    >Logout</Button>
+                    :
+                    <Link
+                        to='/login'
+                        className={styles.login_link}
+                    >Login</Link>
+                }
             </div>
-
         </header>
     )
 }

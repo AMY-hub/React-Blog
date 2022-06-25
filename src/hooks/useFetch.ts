@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { IUserInfo } from "../types/types";
 
 export interface IRespInfo {
     data: unknown,
@@ -17,6 +18,7 @@ export const useFetch = (url: string, state?: any): IRespInfo => {
         setLoading(true);
 
         fetch(url, {
+            method: 'GET',
             signal: abortController.signal
         })
             .then(res => {
@@ -27,6 +29,8 @@ export const useFetch = (url: string, state?: any): IRespInfo => {
                 }
             })
             .then(data => {
+                console.log('Data received!');
+
                 setData(data);
                 setError(null);
             })
@@ -38,7 +42,7 @@ export const useFetch = (url: string, state?: any): IRespInfo => {
             })
         return () => abortController.abort();
 
-    }, [url])
+    }, [url, state])
 
     return { data, loading, error };
 }
