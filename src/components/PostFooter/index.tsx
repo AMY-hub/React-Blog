@@ -7,13 +7,13 @@ import styles from './style.module.scss';
 
 interface IPostFooterProps {
     author: string,
-    topics: string[],
+    topic: string,
     date: number
     id: number
     authorId: string
 }
 
-export const PostFooter = ({ author, topics, date, id, authorId }: IPostFooterProps) => {
+export const PostFooter = ({ author, topic, date, id, authorId }: IPostFooterProps) => {
 
     const { user } = useContext(AppContext) as IAppContext;
 
@@ -22,11 +22,13 @@ export const PostFooter = ({ author, topics, date, id, authorId }: IPostFooterPr
             <div>
                 <span>{`Author: ${author}`}</span>
                 <br />
-                <span>{`Topics: ${topics}`}</span>
+                <span>{`Topic: ${topic}`}</span>
             </div>
             <span>{`Date: ${getDateString(date)}`}</span>
             {(+authorId === user?.id) &&
-                <Link to={`/editpost/${id}`}>Edit post</Link>
+                <Link to={`/editpost/${id}`}
+                    className={styles.footer__edit}
+                >Edit post</Link>
             }
 
         </div>

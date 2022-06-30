@@ -8,13 +8,13 @@ import styles from './style.module.scss';
 
 export const PostsList = () => {
 
-    const { selectedPosts } = useContext(AppContext) as IAppContext;
-    console.log(selectedPosts);
+    const { posts } = useContext(AppContext) as IAppContext;
+    console.log(posts);
 
     return (
         <section className={styles.posts}>
-            {selectedPosts ?
-                selectedPosts.map(post => <PostPreview key={post.id} post={post} />)
+            {posts ?
+                posts.map(post => <PostPreview key={post.id} post={post} />)
                 : <Preloader />
             }
         </section>

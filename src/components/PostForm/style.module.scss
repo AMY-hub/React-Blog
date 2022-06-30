@@ -1,0 +1,53 @@
+@import '../../styles/mixins.scss';
+
+.form {
+    @include content-block;
+    margin: 0 auto;
+}
+
+.form__fields {
+    display: flex;
+    flex-direction: column;
+}
+
+.form__name {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    color: var(--main-text);
+}
+
+.form__title {
+    @include form-field;
+    width: 80%;
+}
+
+.form__body {
+    @include form-field;
+    width: 100%;
+}
+
+.form__select {
+    @include form-field;
+
+    option {
+        padding: 0.5rem;
+        border-bottom: 2px solid var(--dark-text);
+    }
+}
+
+.form__submit {
+    @include sec-accent-btn;
+    display: block;
+    margin-left: auto;
+    font-size: 1.3rem;
+}
+
+.topic {
+    display: inline-block;
+    margin: 0 0.3rem;
+    padding: 0.1rem 0.3rem;
+    border-radius: 0.3rem;
+    background-color: var(--content-bg-light);
+    color: var(--bright-text);
+}

@@ -1,17 +1,25 @@
 import { useEffect, useState } from "react";
-import { IUserInfo } from "../types/types";
 
-export interface IRespInfo {
-    data: unknown,
-    error: string | null,
-    loading: boolean,
+interface IUseFetchProps {
+    url: string,
+    state?: any,
+    setDataCount?: (state: string) => void
 }
 
-export const useFetch = (url: string, state?: any): IRespInfo => {
+interface IUseFetchResp {
+    data: any,
+    loading: boolean,
+    error: string | null
+}
+
+type UseFetch = (props: IUseFetchProps) => (IUseFetchResp);
+
+export const useFetch: UseFetch = ({ url, state, setDataCount }) => {
 
     const [data, setData] = useState<unknown>(null);
-    const [loading, setLoading] = useState<boolean>(false);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -25,17 +33,23 @@ export const useFetch = (url: string, state?: any): IRespInfo => {
                 if (res.ok !== true) {
                     throw new Error('Could not load data from this resourse');
                 } else {
+                    console.log(res.headers.get('X-Total-Count'));
+                    if (setDataCount) {
+                        const total = res.headers.get('X-Total-Count');
+                        if (total) setDataCount(total);
+                    }
                     return res.json();
                 }
             })
             .then(data => {
                 console.log('Data received!');
-
                 setData(data);
                 setError(null);
             })
             .catch((err: Error) => {
-                setError(err.message);
+                console.log(err.name);
+
+                if (err.name !== 'AbortError') setError(err.message);
             })
             .finally(() => {
                 setLoading(false);
@@ -44,5 +58,5 @@ export const useFetch = (url: string, state?: any): IRespInfo => {
 
     }, [url, state])
 
-    return { data, loading, error };
+    return { data, loading, error }
 }

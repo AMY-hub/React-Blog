@@ -2,13 +2,13 @@
 export type Theme = 'light' | 'dark';
 
 export interface IAppContext {
-    allPosts: IPost[],
-    selectedPosts: IPost[],
-    setSelectedPosts: React.Dispatch<React.SetStateAction<IPost[]>>,
+    posts: IPost[],
     theme: string,
-    setTheme: React.Dispatch<any>,
+    setTheme: React.Dispatch<React.SetStateAction<string>>,
     filter: string,
     setFilter: React.Dispatch<React.SetStateAction<string>>,
+    sidebarOpen: boolean,
+    setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>,
     user: IUserInfo | null,
     setUser: React.Dispatch<React.SetStateAction<IUserInfo | null>>,
     updatePostsList: boolean,
@@ -20,7 +20,7 @@ export interface IPostFormData {
     preview: string,
     body: string,
     author: string,
-    topics: string[],
+    topic: string,
     authorId: string
 }
 

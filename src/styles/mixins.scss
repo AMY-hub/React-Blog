@@ -1,0 +1,67 @@
+
+@mixin sec-accent-btn {
+    display: inline-block;
+    padding: 0.5em 1em;
+    font-weight: 500;
+    background-color: var(--accent-second);
+    color: var(--bright-text);
+    border-radius: 0.3em;
+    transition: all 500ms;
+
+    &:hover,&:focus {
+        box-shadow: 0 0 0.8em var(--accent-second);
+    }
+
+    &:disabled {
+        pointer-events: none;
+        opacity: 0.6;
+    }
+}
+
+@mixin first-accent-btn {
+    display: inline-block;
+    padding: 0.5em 1em;
+    font-weight: 500;
+    background-color: var(--accent-first);
+    color: var(--bright-text);
+    border-radius: 0.3em;
+    transition: all 500ms;
+
+    &:hover,&:focus {
+        box-shadow: 0 0 0.8em var(--accent-first);
+    }
+
+    &:disabled {
+        pointer-events: none;
+        opacity: 0.6;
+    }
+}
+
+@mixin form-field {
+    font-size: 1rem;
+    padding: 0.5rem;
+    color: var(--bright-text);
+    background-color: var(--content-bg-light);
+    border: 2px solid var(--dark-text);
+    border-radius: 0.3rem;
+
+    &::placeholder {
+        color: var(--dark-text);
+    }
+
+    &:focus {
+        border: 2px solid var(--bright-text);
+    }
+}
+
+@mixin content-block {
+    padding: 2em;
+    background-color: var(--content-bg);
+    box-shadow: var(--content-shadow);
+    color: var(--main-text);
+    border-radius: 0.3em;
+
+    @media( max-width: 750px ) {
+        padding: 1em;
+    }
+}

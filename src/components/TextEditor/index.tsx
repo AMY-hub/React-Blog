@@ -16,6 +16,7 @@ interface IEditorProps {
 export const TextEditor = ({ bodyHTML, setBodyHTML, previewHTML, setPreviewHTML }: IEditorProps) => {
 
     const prevEditor = useEditor({
+        content: previewHTML,
         extensions: [
             StarterKit,
             Placeholder.configure({
@@ -26,6 +27,7 @@ export const TextEditor = ({ bodyHTML, setBodyHTML, previewHTML, setPreviewHTML 
     })
 
     const editor = useEditor({
+        content: bodyHTML,
         extensions: [
             StarterKit,
             Placeholder.configure({
@@ -34,8 +36,6 @@ export const TextEditor = ({ bodyHTML, setBodyHTML, previewHTML, setPreviewHTML 
         ],
         onUpdate: ({ editor }) => setBodyHTML(editor.getHTML()),
     });
-
-    console.log(bodyHTML);
 
     return (
         <div className={styles.texteditor}>

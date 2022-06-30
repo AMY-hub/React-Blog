@@ -1,3 +1,5 @@
+@import '../../styles/mixins.scss';
+
 .success {
     text-align: center;
     padding: 2rem;
@@ -14,15 +16,18 @@
     }
 
     .homelink, .addpost{
-        display: inline-block;
-        padding: 1rem;
-        font-size: 1.2rem;
-        font-weight: 500;
-        background-color: var(--accent-second);
-        color: var(--bright-text);
-        border-radius: 0.3rem;
-        &:hover,&:focus {
-            box-shadow: 0 0 5px 0.1em var(--accent-second-contrast);
-        }
+        @include sec-accent-btn;
     }
+
+    @media(max-width: 750px) {
+        padding: 1rem;
+
+        h2 {
+            font-size: 2rem;
+        }
+    
+        p {
+            font-size: 1.2rem;
+    }
+}
 }

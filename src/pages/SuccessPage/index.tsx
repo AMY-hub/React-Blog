@@ -10,7 +10,7 @@ export const SuccessPage = () => {
 
     return (
         <div className={styles.success}>
-            <h2>Your post was successfully created!</h2>
+            <h2>Your post was successfully published!</h2>
             <p>You can return to the main page: </p>
             <Link
                 onClick={() => setUpdatePostsList(!updatePostsList)}

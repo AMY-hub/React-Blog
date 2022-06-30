@@ -15,14 +15,18 @@ export const Header: React.FC = () => {
 
     return (
         <header className={styles.header}>
-            <div className={styles.header__logo}>
-                <Logo className={styles.logo}></Logo>
-                <Link to='/' className={styles.header__name}>
-                    Blog
-                </Link>
-            </div>
-            <div className={styles.header__options}>
+            <div className={styles.header__container}>
+                <div className={styles.header__logo}>
+                    <Logo className={styles.logo}></Logo>
+                    <Link to='/' className={styles.header__name}>
+                        Blog
+                    </Link>
+                </div>
                 <ThemeSwitcher />
+            </div>
+            <div className={styles.header__user}>
+                {user &&
+                    <p className={styles.header__greeting}>{`Hello, ${user.name}!`}</p>}
                 {user ?
                     <Button
                         onClick={() => setUser(null)}

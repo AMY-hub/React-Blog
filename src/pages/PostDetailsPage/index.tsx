@@ -18,7 +18,10 @@ export const PostDetailsPage = () => {
     const { id } = useParams();
     const { updatePostsList } = useContext(AppContext) as IAppContext;
 
-    const { data, error, loading } = useFetch(mainPath + '/posts/' + id, updatePostsList);
+    const { data, error, loading } = useFetch({
+        url: mainPath + '/posts/' + id,
+        state: updatePostsList
+    });
     const post = data as IPost;
 
     return (
@@ -31,7 +34,7 @@ export const PostDetailsPage = () => {
                     <div className={styles.post__body}>{parse(post.body)}</div>
                     <PostFooter
                         author={post.author}
-                        topics={post.topics}
+                        topic={post.topic}
                         date={post.createdAt}
                         id={post.id}
                         authorId={post.authorId} />

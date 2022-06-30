@@ -22,7 +22,7 @@ export const PostPreview: React.FC<IPostPreview> = ({ post }) => {
             >Read more</Link>
             <PostFooter
                 author={post.author}
-                topics={post.topics}
+                topic={post.topic}
                 date={post.createdAt}
                 id={post.id}
                 authorId={post.authorId} />

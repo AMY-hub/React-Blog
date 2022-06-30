@@ -1,9 +1,9 @@
-import { useState, createContext, useEffect, useLayoutEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { useFetch } from '../../hooks/useFetch';
+import { useState, createContext } from 'react';
+import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
+import { usePaginatedData } from '../../hooks/usePaginatedData';
 
 import { mainPath } from '../../consts/path';
-import { IAppContext, IPost, IUserInfo } from '../../types/types';
+import { IAppContext, IPost } from '../../types/types';
 
 import '../../styles/vars.scss';
 import './App.scss';
@@ -19,41 +19,48 @@ import { LoginPage } from '../../pages/LoginPage';
 import { ProtectedRoute } from '../ProtectedRoute';
 import { SuccessPage } from '../../pages/SuccessPage';
 import { EditPostPage } from '../../pages/EditPostPage';
+import { Pagination } from '../Pagination';
 
 export const AppContext = createContext<IAppContext | null>(null);
 
 export function App() {
 
   const [theme, setTheme] = useLocalStorage('blogTheme', 'dark');
-  const [selectedPosts, setSelectedPosts] = useState<Array<IPost>>([]);
-  const [filter, setFilter] = useState<string>('all');
+  const [filter, setFilter] = useState('all');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [updatePostsList, setUpdatePostsList] = useState<boolean>(false);
   const [user, setUser] = useLocalStorage('blogUser', null);
 
-  const { data, error } = useFetch(mainPath + '/posts', updatePostsList);
-  const allPosts = data as IPost[];
-
-  useLayoutEffect(() => {
-    if (filter !== 'all') {
-      const filtered = allPosts.filter(post => post.topics.includes(filter));
-      setSelectedPosts(filtered);
-    } else {
-      setSelectedPosts(allPosts);
-    }
-  }, [filter, data]);
 
 
+  const { data, error, currentPage, pagesCount, getNextPage, getPrevPage, setPage } = usePaginatedData({
+    urlData: {
+      basePath: mainPath + '/posts',
+      queryParams: filter === 'all' ? null : `topic=${filter}`
+    },
+    state: updatePostsList,
+    itemsPerPage: 3
+  });
+  const posts = data as IPost[];
+
+  const pagination = <Pagination
+    currentPage={currentPage}
+    pagesCount={pagesCount}
+    setPage={setPage}
+    getNextPage={getNextPage}
+    getPrevPage={getPrevPage}
+  />
 
   return (
     <BrowserRouter>
       <AppContext.Provider value={{
-        allPosts,
-        selectedPosts,
-        setSelectedPosts,
+        posts,
         theme,
         setTheme,
         filter,
         setFilter,
+        sidebarOpen,
+        setSidebarOpen,
         user,
         setUser,
         updatePostsList,
@@ -66,7 +73,7 @@ export function App() {
               <ErrorMessage text={error} />
               :
               <Routes>
-                <Route path='/' element={<MainPage />} />
+                <Route path='/' element={<MainPage pagination={pagination} />} />
                 <Route path='/login' element={<LoginPage />} />
                 <Route path='/newpost' element={
                   <ProtectedRoute user={user}>
@@ -86,9 +93,7 @@ export function App() {
           </div>
         </div>
       </AppContext.Provider>
-
     </BrowserRouter >
-
   );
 }
 

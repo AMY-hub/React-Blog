@@ -1,3 +1,5 @@
+@import '../../styles/mixins.scss';
+
 .signup__form {
     display: flex;
     flex-direction: column;
@@ -7,36 +9,18 @@
 
     p {
         font-size: 1.2rem;
+        padding-bottom: 0.5rem;
         color: var(--main-text);
     }
 
     input {
-        font-size: 1rem;
-        padding: 0.5rem;
+        @include form-field;
         margin-bottom: 1rem;
-        color: var(--bright-text);
-        background-color: var(--content-bg-light);
-        border: 2px solid var(--dark-text);
-        border-radius: 0.3rem;
-    
-        &:focus {
-            border: 2px solid var(--main-text);
-        }
     }
 }
 
 .signup__submit {
-    display: inline-block;
-    padding: 0.3em 1.4em;
+    @include first-accent-btn;
     margin-top: 1rem;
-    border-radius: 0.3em;
     font-size: 1.2rem;
-    font-weight: 500;
-    color: var(--bright-text);
-    background-color: var(--accent-first);
-    transition: all 500ms;
-
-    &:hover,&:focus {
-        box-shadow: 0 0 0.8em var(--accent-first);
-    }
 }

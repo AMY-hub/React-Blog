@@ -1,11 +1,37 @@
+@import '../../styles/mixins.scss';
+
 .footer {
     display: flex;
     justify-content: space-between;
-    font-size: 0.95rem;
+    align-items: center;
+    font-size: 0.9rem;
     color: var(--dark-text);
 
     span {
         display: inline-block;
         padding-bottom: 0.5rem;
+    }
+
+    @media(max-width: 426px) {
+        font-size: 0.8rem;
+        flex-direction: column-reverse;
+        align-items: start;
+    }
+}
+
+.footer__edit {
+    padding: 0.5em;
+    font-size: 1.1rem;
+    color: var(--accent-second-contrast);
+    border: 2px solid var(--accent-second-contrast);
+    border-radius: 0.3rem;
+
+    &:hover, &:focus{
+        text-shadow: 0 0 0.6em var(--accent-second);
+    }
+
+    @media(max-width: 426px) {
+        padding: 0.3em;
+        margin-bottom: 1em;
     }
 }
