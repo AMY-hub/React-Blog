@@ -1,5 +1,5 @@
 import { mainPath } from "../consts/path";
-import { IUserInfo } from "../types/types";
+import { IPostFormData, IUserInfo } from "../types/types";
 
 type PostFN = (
     data: any,

@@ -37,14 +37,12 @@ export const useFetch: UseFetch = ({ url, state }) => {
                 return res.json();
             }
         }).then(data => {
-            console.log('Data received!');
             setData(data);
             if (total) {
                 setDataCount(total);
             }
             setError(null);
         }).catch((err: Error) => {
-            console.log(err.name);
             if (err.name !== 'AbortError') setError(err.message);
         }).finally(() => {
             setLoading(false);

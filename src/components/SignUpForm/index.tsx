@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { mainPath } from '../../consts/path';
 import { IAppContext, IUserFormData } from '../../types/types';
+import { login } from '../../utils/login';
 import { AppContext } from '../App/App';
 
 import { ErrorMessage } from '../ErrorMessage';
@@ -17,7 +18,8 @@ export const SighUpForm: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState<IUserFormData>({
         email: '', password: '', name: ''
-    })
+    });
+
     const navigate = useNavigate();
 
     const handleSubmit: React.ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -26,31 +28,7 @@ export const SighUpForm: React.FC = () => {
 
     const signUp: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
-        setLoading(true);
-        fetch(mainPath + '/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                if (data.user) {
-                    setUser({
-                        ...data.user,
-                        accessToken: data.accessToken,
-                        createdAt: Date.now()
-                    });
-                    navigate('/');
-                } else if (data === 'Email already exists') {
-                    throw new Error(data);
-                } else {
-                    throw new Error('Something went wrong...')
-                }
-            })
-            .catch((err: Error) => setError(err.message))
-            .finally(() => setLoading(false))
-
+        login(`${mainPath}/register`, formData, setUser, setLoading, setError, navigate);
     }
 
     return (

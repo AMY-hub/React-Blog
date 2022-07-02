@@ -1,12 +1,13 @@
-interface IValidationResp {
+type ValidateFN = (data: { [key: string]: any }) => {
     invalidFields: string[],
     invalid: boolean
-}
+};
 
-export const validatePostData = (postData: { [key: string]: any }): IValidationResp => {
+export const validatePostData: ValidateFN = (data) => {
     const invalidFields: string[] = [];
-    for (let key in postData) {
-        const content = postData[key];
+
+    for (let key in data) {
+        const content = data[key];
 
         if (typeof content === 'string') {
             if (!content.trim()) {
@@ -16,6 +17,8 @@ export const validatePostData = (postData: { [key: string]: any }): IValidationR
             if (content.length === 0) {
                 invalidFields.push(key);
             }
+        } else if (!content) {
+            invalidFields.push(key);
         }
     }
     return {
