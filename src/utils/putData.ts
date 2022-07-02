@@ -1,7 +1,7 @@
 import { mainPath } from "../consts/path";
 import { IUserInfo } from "../types/types";
 
-type putFN = (
+type PutFN = (
     id: number | string,
     data: any,
     user: IUserInfo | null,
@@ -10,7 +10,7 @@ type putFN = (
     setSuccess: React.Dispatch<React.SetStateAction<boolean>>,
 ) => void;
 
-export const putData: putFN = (id, data, user, setPending, setError, setSuccess) => {
+export const putData: PutFN = (id, data, user, setPending, setError, setSuccess) => {
     setSuccess(false);
     setPending(true);
     const path = mainPath + `/posts/` + id;
@@ -23,8 +23,6 @@ export const putData: putFN = (id, data, user, setPending, setError, setSuccess)
         body: JSON.stringify(data)
     })
         .then(res => {
-            console.log(res);
-
             if (res.ok !== true) {
                 throw new Error(`Couldn't create post`);
             } else {

@@ -1,5 +1,5 @@
-import React from "react";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate } from "react-router-dom";
+
 import { IUserInfo } from "../../types/types";
 
 interface IPRouteProps {

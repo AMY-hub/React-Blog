@@ -24,10 +24,20 @@
         color: var(--bright-text);
         font-size: 2rem;
         font-weight: 500;
+
+        @media(max-width: 430px) {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
     }
 
     &__body {
         margin-bottom: 2em;
+
+        @media(max-width: 430px) {
+            font-size: 1.1rem;
+            margin-bottom: 1.2rem;
+        }
     }
 }
 

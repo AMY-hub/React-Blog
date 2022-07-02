@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useFetch } from "./useFetch";
 
-interface IGetProps {
+interface IParinatedProps {
     urlData: { basePath: string, queryParams: string | null },
     itemsPerPage: number,
     state?: any
 }
 
-interface IGetResponse {
+interface IPaginatedResponse {
     data: unknown,
     error: string | null,
     loading: boolean,
@@ -18,32 +18,27 @@ interface IGetResponse {
     setPage: (n: number) => void
 }
 
-type GetPaginatedData = (props: IGetProps) => (IGetResponse);
+type GetPaginatedData = (props: IParinatedProps) => (IPaginatedResponse);
 
 export const usePaginatedData: GetPaginatedData = ({ urlData, itemsPerPage, state }) => {
 
-    const [currentPage, setCurrentPage] = useState(() => {
-        return +window.location.search?.split('=')[1] || 1
-    });
-    const [dataCount, setDataCount] = useState('0');
+    const [currentPage, setCurrentPage] = useState(
+        () => +window.location.search?.split('=')[1] || 1);
 
     const query = urlData.queryParams ?
-        `${urlData.basePath}?${urlData.queryParams}&_page=${currentPage}&_limit=${itemsPerPage}`
-        : `${urlData.basePath}?_page=${currentPage}&_limit=${itemsPerPage}`;
-    console.log(query);
+        `${urlData.basePath}&${urlData.queryParams}&_page=${currentPage}&_limit=${itemsPerPage}`
+        : `${urlData.basePath}&_page=${currentPage}&_limit=${itemsPerPage}`;
 
-
-    const { data, loading, error } = useFetch({
+    const { data, dataCount, loading, error } = useFetch({
         url: query,
         state: state,
-        setDataCount: setDataCount
     });
-
     const pagesCount = Math.ceil(+dataCount / itemsPerPage);
 
+    //For pagination update when filter query was changed:
     useEffect(() => {
-        if (currentPage > pagesCount) setCurrentPage(1)
-    }, [pagesCount])
+        if (pagesCount !== 0 && currentPage > pagesCount) setCurrentPage(1)
+    }, [pagesCount, currentPage])
 
     const getNextPage = () => {
         setCurrentPage(currentPage => {

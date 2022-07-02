@@ -1,24 +1,17 @@
-import React, { useContext, useRef } from 'react';
-import { BurgerBtn } from '../BurgerBtn';
+import { useContext, useRef } from 'react';
 import { useClickOutside } from '../../hooks/useClickOutside';
-import { IAppContext } from '../../types/types';
-import createKey from '../../utils/createKey';
-import { formatFilterName } from '../../utils/formatFilterName';
-import { AppContext } from '../App/App';
+
+import { BurgerBtn } from '../BurgerBtn';
 import { Button } from '../Button';
+
+import { AppContext } from '../App/App';
+import { formatFilterName } from '../../utils/formatFilterName';
+import createKey from '../../utils/createKey';
+import { IAppContext } from '../../types/types';
+
 import styles from './style.module.scss';
-import { NavLink } from 'react-router-dom';
-
-
-// interface IFilterProps {
-//     filter: string,
-//     setFilter: React.Dispatch<React.SetStateAction<string>>,
-//     sidebarOpen: boolean,
-//     setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>,
-// }
 
 export const FilterPanel = () => {
-
     const options = [
         'all',
         'css',
@@ -29,7 +22,6 @@ export const FilterPanel = () => {
     const { filter, setFilter, sidebarOpen, setSidebarOpen } = useContext(AppContext) as IAppContext;
 
     const sidebarRef = useRef(null);
-
     useClickOutside(sidebarRef, () => setSidebarOpen(false));
 
     const optList = options.map(opt => {
@@ -61,7 +53,5 @@ export const FilterPanel = () => {
                 {optList}
             </ul>
         </div>
-
-
     )
 }

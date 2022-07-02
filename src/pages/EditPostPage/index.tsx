@@ -1,17 +1,19 @@
 import { useContext, useLayoutEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { confirmAlert } from 'react-confirm-alert';
+
+import { IAppContext } from '../../types/types';
+import { deleteData } from '../../utils/deleteData';
+
 import { PostForm } from '../../components/PostForm';
 import { AppContext } from '../../components/App/App';
 import { Button } from '../../components/Button';
 import { ErrorMessage } from '../../components/ErrorMessage';
 import { Preloader } from '../../components/Preloader';
-import { IAppContext } from '../../types/types';
-import { deleteData } from '../../utils/deleteData';
+import { NotFound } from '../NotFound';
+import { Modal } from '../../components/Modal';
 
 import styles from './style.module.scss';
-import { NotFound } from '../NotFound';
-import { confirmAlert } from 'react-confirm-alert';
-import { Modal } from '../../components/Modal';
 
 export const EditPostPage = () => {
 
@@ -34,12 +36,11 @@ export const EditPostPage = () => {
         return <NotFound />
     }
 
+    //Because the ownership check on the server does not work:
     const post = posts.find((post) => post.id === +id && +post.authorId === user?.id);
     if (!post) {
         setError("Couldn't find this post or you don't have access to it.")
     }
-
-    console.log(post);
 
     const handleConfirm = (onClose: () => void) => {
         deleteData(post!.id, user, setError,

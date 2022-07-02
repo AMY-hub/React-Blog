@@ -1,14 +1,13 @@
 import { mainPath } from "../consts/path";
 import { IUserInfo } from "../types/types";
 
-type deleteFN = (
+type DeleteFN = (
     id: number | string,
     user: IUserInfo | null,
     setError: React.Dispatch<React.SetStateAction<string | null>>,
     callback?: () => void) => void;
 
-export const deleteData: deleteFN = (id, user, setError, callback?: () => void) => {
-    console.log('Delete ' + id);
+export const deleteData: DeleteFN = (id, user, setError, callback?: () => void) => {
     fetch(mainPath + '/posts/' + id, {
         method: 'DELETE',
         headers: {

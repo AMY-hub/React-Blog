@@ -1,7 +1,9 @@
 import { useState } from 'react';
+
 import { Button } from '../../components/Button';
 import { SighInForm } from '../../components/SignInForm';
 import { SighUpForm } from '../../components/SignUpForm';
+
 import styles from './style.module.scss';
 
 export const LoginPage = () => {

@@ -1,18 +1,15 @@
 import { useState, createContext } from 'react';
-import { BrowserRouter, Routes, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { usePaginatedData } from '../../hooks/usePaginatedData';
+import { useLocalStorage } from '../../hooks/useLocalStorage';
 
 import { mainPath } from '../../consts/path';
 import { IAppContext, IPost } from '../../types/types';
-
-import '../../styles/vars.scss';
-import './App.scss';
 
 import { Header } from '../Header';
 import { MainPage } from '../../pages/MainPage';
 import { AddPostPage } from '../../pages/AddPostPage';
 import { PostDetailsPage } from '../../pages/PostDetailsPage';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { NotFound } from '../../pages/NotFound';
 import { ErrorMessage } from '../ErrorMessage';
 import { LoginPage } from '../../pages/LoginPage';
@@ -20,6 +17,12 @@ import { ProtectedRoute } from '../ProtectedRoute';
 import { SuccessPage } from '../../pages/SuccessPage';
 import { EditPostPage } from '../../pages/EditPostPage';
 import { Pagination } from '../Pagination';
+
+import '../../styles/vars.scss';
+import './App.scss';
+
+
+
 
 export const AppContext = createContext<IAppContext | null>(null);
 
@@ -31,11 +34,9 @@ export function App() {
   const [updatePostsList, setUpdatePostsList] = useState<boolean>(false);
   const [user, setUser] = useLocalStorage('blogUser', null);
 
-
-
   const { data, error, currentPage, pagesCount, getNextPage, getPrevPage, setPage } = usePaginatedData({
     urlData: {
-      basePath: mainPath + '/posts',
+      basePath: mainPath + '/posts?_sort=createdAt&_order=desc',
       queryParams: filter === 'all' ? null : `topic=${filter}`
     },
     state: updatePostsList,

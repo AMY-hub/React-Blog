@@ -1,9 +1,12 @@
 import { useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+import { AppContext } from '../App/App';
 import { IAppContext } from '../../types/types';
 import { formatFilterName } from '../../utils/formatFilterName';
-import { AppContext } from '../App/App';
+
 import { PostsList } from '../PostsList';
+
 import styles from './style.module.scss';
 
 interface IPostsSectionProps {

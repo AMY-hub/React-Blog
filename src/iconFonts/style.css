@@ -33,3 +33,6 @@
 .icon-moon::after {
   content: "\e902";
 }
+.icon-arrow::after {
+  content: "\e903";
+}

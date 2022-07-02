@@ -1,14 +1,16 @@
 import { useContext, useState } from 'react';
+
 import { AppContext } from '../App/App';
+import { IAppContext, IPost } from '../../types/types';
+import { postData } from '../../utils/postData';
+import { putData } from '../../utils/putData';
+import { validatePostData } from '../../utils/validatePostData';
+
 import { ErrorMessage } from '../ErrorMessage';
 import { SubmitButton } from '../SubmitButton';
 import { TextEditor } from '../TextEditor';
-import { IAppContext, IPost } from '../../types/types';
-import { postData } from '../../utils/postData';
-import { validatePostData } from '../../utils/validatePostData';
 
 import styles from './style.module.scss';
-import { putData } from '../../utils/putData';
 
 interface IPostFormProps {
     isPending: boolean,

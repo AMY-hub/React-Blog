@@ -1,1 +1,1 @@
-export const mainPath = 'http://localhost:8000';
+export const mainPath = 'https://petite-traveling-celestite.glitch.me';

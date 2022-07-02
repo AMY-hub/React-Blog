@@ -1,8 +1,9 @@
-import styles from './style.module.scss';
-
 import { useContext } from 'react';
+
 import { AppContext } from '../App/App';
 import { IAppContext } from '../../types/types';
+
+import styles from './style.module.scss';
 
 export const ThemeSwitcher = (): JSX.Element => {
 

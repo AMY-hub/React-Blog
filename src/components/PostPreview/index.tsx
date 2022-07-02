@@ -1,8 +1,9 @@
-
 import { Link } from 'react-router-dom';
-import { IPost } from '../../types/types';
-import { PostFooter } from '../PostFooter';
 import parse from 'html-react-parser';
+
+import { IPost } from '../../types/types';
+
+import { PostFooter } from '../PostFooter';
 
 import styles from './style.module.scss';
 
@@ -11,7 +12,6 @@ interface IPostPreview {
 }
 
 export const PostPreview: React.FC<IPostPreview> = ({ post }) => {
-
     return (
         <article className={styles.preview}>
             <h2 className={styles.preview__title}>{post.title}</h2>

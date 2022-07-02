@@ -1,7 +1,6 @@
-import styles from './style.module.scss';
+import { Link } from 'react-router-dom';
 
-import React from 'react'
-import { Link, NavLink } from 'react-router-dom';
+import styles from './style.module.scss';
 
 interface IPaginationProps {
     currentPage: number,
@@ -19,28 +18,37 @@ export const Pagination: React.FC<IPaginationProps> = ({ currentPage, pagesCount
     }
     const pages = pageNums.map(num => {
         return (
-            <NavLink
+            <Link
+                className={currentPage === num ?
+                    `${styles.pagination__page} ${styles.active}`
+                    : styles.pagination__page}
                 key={num}
                 onClick={() => setPage(num)}
                 to={`/?page=${num}`}>
                 {num}
-            </NavLink>
+            </Link >
         )
-    })
+    });
 
     return (
-        <div>
+        <div className={styles.pagination}>
             {pages.length > 1 &&
                 <>
                     <Link
                         to={`/?page=${currentPage === 1 ? 1 : currentPage - 1}`}
                         onClick={getPrevPage}
-                    >Prev</Link>
+                        className={currentPage === 1 ?
+                            `${styles.pagination__prev} icon-arrow ${styles.disabled}`
+                            : `${styles.pagination__prev} icon-arrow`}
+                    ></Link>
                     {pages}
                     <Link
                         to={`/?page=${currentPage === pagesCount ? pagesCount : currentPage + 1}`}
                         onClick={getNextPage}
-                    >Next</Link>
+                        className={currentPage === pageNums.length ?
+                            `${styles.pagination__next} icon-arrow ${styles.disabled}`
+                            : `${styles.pagination__next} icon-arrow`}
+                    ></Link>
                 </>
             }
         </div>

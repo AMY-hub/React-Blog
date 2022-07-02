@@ -1,17 +1,17 @@
-
+import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { PostFooter } from '../../components/PostFooter';
-import { Preloader } from '../../components/Preloader';
+import parse from 'html-react-parser';
+
 import { mainPath } from '../../consts/path';
 import { useFetch } from '../../hooks/useFetch';
 import { IAppContext, IPost } from '../../types/types';
+import { AppContext } from '../../components/App/App';
 
-import parse from 'html-react-parser';
+import { PostFooter } from '../../components/PostFooter';
+import { Preloader } from '../../components/Preloader';
+import { ErrorMessage } from '../../components/ErrorMessage';
 
 import styles from './style.module.scss';
-import { useContext } from 'react';
-import { AppContext } from '../../components/App/App';
-import { ErrorMessage } from '../../components/ErrorMessage';
 
 export const PostDetailsPage = () => {
 

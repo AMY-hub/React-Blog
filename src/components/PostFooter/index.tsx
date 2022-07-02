@@ -1,8 +1,10 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+
+import { AppContext } from '../App/App';
 import { IAppContext } from '../../types/types';
 import { getDateString } from '../../utils/getDateString';
-import { AppContext } from '../App/App';
+
 import styles from './style.module.scss';
 
 interface IPostFooterProps {

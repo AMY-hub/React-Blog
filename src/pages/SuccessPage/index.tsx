@@ -1,7 +1,9 @@
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+
 import { AppContext } from '../../components/App/App';
 import { IAppContext } from '../../types/types';
+
 import styles from './style.module.scss';
 
 export const SuccessPage = () => {

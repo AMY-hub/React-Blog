@@ -1,4 +1,4 @@
-import { useEffect } from "react"
+import { useEffect } from "react";
 
 type onClickOutsideFN = (ref: React.MutableRefObject<HTMLElement | null>,
     handler: (e?: React.MouseEvent) => void) => void;
@@ -14,7 +14,6 @@ export const useClickOutside: onClickOutsideFN = (ref, handler) => {
             }
         }
         document.addEventListener('mousedown', listener);
-        console.log('Listener added');
 
         return () => {
             document.removeEventListener('mousedown', listener);

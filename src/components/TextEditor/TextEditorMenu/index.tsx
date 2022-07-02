@@ -1,6 +1,6 @@
-import styles from './style.module.scss';
-
 import { Editor } from '../../../../node_modules/@tiptap/react/src/Editor';
+
+import styles from './style.module.scss';
 
 interface IMenuProps {
     editor: Editor | null

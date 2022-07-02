@@ -1,4 +1,5 @@
 import { Button, ButtonProps } from '../Button';
+
 import styles from './style.module.scss';
 
 type SubmitBtnProps = ButtonProps & { loading: boolean };

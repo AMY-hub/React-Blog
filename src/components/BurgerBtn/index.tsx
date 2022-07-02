@@ -1,8 +1,3 @@
-import { SetStateAction, useContext } from 'react';
-import { AppContext } from '../App/App';
-import { IAppContext } from '../../types/types';
-
-
 import styles from './style.module.scss';
 
 interface IBurgerProps {
@@ -11,7 +6,6 @@ interface IBurgerProps {
 }
 
 export const BurgerBtn: React.FC<IBurgerProps> = ({ sidebarOpen, setSidebarOpen }) => {
-
     return (
         <button
             onClick={() => setSidebarOpen(!sidebarOpen)}

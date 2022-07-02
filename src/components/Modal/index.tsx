@@ -1,4 +1,5 @@
 import { Button } from '../Button';
+
 import './style.scss';
 
 interface ImodalProps {
@@ -9,7 +10,6 @@ interface ImodalProps {
 }
 
 export const Modal: React.FC<ImodalProps> = ({ onClose, message, callback, theme }) => {
-
     return (
         <div
             className={`modal theme-${theme === 'dark' ? 'dark' : 'light'}`}>

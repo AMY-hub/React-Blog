@@ -1,13 +1,14 @@
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
+
+import { AppContext } from '../App/App';
+import { ReactComponent as Logo } from '../../images/web.svg';
+import { IAppContext } from '../../types/types';
+
+import { ThemeSwitcher } from '../ThemeSwitcher';
+import { Button } from '../Button';
 
 import styles from './style.module.scss';
-
-import { ReactComponent as Logo } from '../../images/web.svg';
-import { ThemeSwitcher } from '../ThemeSwitcher';
-import { Link } from 'react-router-dom';
-import { IAppContext } from '../../types/types';
-import { AppContext } from '../App/App';
-import { useContext } from 'react';
-import { Button } from '../Button';
 
 export const Header: React.FC = () => {
 
@@ -19,7 +20,7 @@ export const Header: React.FC = () => {
                 <div className={styles.header__logo}>
                     <Logo className={styles.logo}></Logo>
                     <Link to='/' className={styles.header__name}>
-                        Blog
+                        WeBlog
                     </Link>
                 </div>
                 <ThemeSwitcher />

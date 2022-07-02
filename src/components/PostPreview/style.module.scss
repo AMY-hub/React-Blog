@@ -2,6 +2,7 @@
 
 .preview {
    @include content-block;
+   margin-bottom: 2rem;
    
     ul, li {
         margin-left: 1.5rem;
@@ -13,10 +14,20 @@
     color: var(--bright-text);
     font-weight: 500;
     margin-bottom: 1.5em;
+
+    @media(max-width: 430px) {
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+    }
 }
 
 .preview__excerpt {
     margin-bottom: 2em;
+
+    @media(max-width: 430px) {
+        font-size: 1.1rem;
+        margin-bottom: 1.2rem;
+    }
 }
 
 .preview__readmore {
@@ -37,7 +48,7 @@
         text-shadow: 0 0 0.6em var(--accent-second);
     }
 
-    @media(max-width: 426px) {
+    @media(max-width: 430px) {
         margin-bottom: 0.7rem;
     }
 }
