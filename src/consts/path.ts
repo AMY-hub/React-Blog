@@ -1,1 +1,1 @@
-export const mainPath = 'https://petite-traveling-celestite.glitch.me';
+export const mainPath = 'https://petite-traveling-celestite.glitch.me/';

@@ -21,8 +21,7 @@ import { Pagination } from '../Pagination';
 import '../../styles/vars.scss';
 import './App.scss';
 
-
-
+const path = process.env.REACT_APP_FOR_PATH;
 
 export const AppContext = createContext<IAppContext | null>(null);
 
@@ -74,20 +73,20 @@ export function App() {
               <ErrorMessage text={error} />
               :
               <Routes>
-                <Route path='/' element={<MainPage pagination={pagination} />} />
-                <Route path='/login' element={<LoginPage />} />
-                <Route path='/newpost' element={
+                <Route path={path + '/'} element={<MainPage pagination={pagination} />} />
+                <Route path={path + '/login'} element={<LoginPage />} />
+                <Route path={path + '/newpost'} element={
                   <ProtectedRoute user={user}>
                     <AddPostPage />
                   </ProtectedRoute>
                 } />
-                <Route path='/editpost/:id' element={
+                <Route path={path + '/editpost/:id'} element={
                   <ProtectedRoute user={user}>
                     <EditPostPage />
                   </ProtectedRoute>
                 } />
-                <Route path='/successfully' element={<SuccessPage />} />
-                <Route path='/posts/:id' element={<PostDetailsPage />} />
+                <Route path={path + '/successfully'} element={<SuccessPage />} />
+                <Route path={path + '/posts/:id'} element={<PostDetailsPage />} />
                 <Route path='*' element={<NotFound />} />
               </Routes>
             }
