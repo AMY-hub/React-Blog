@@ -36,7 +36,11 @@ export const SighUpForm: React.FC = () => {
             .then(data => {
                 console.log(data);
                 if (data.user) {
-                    setUser(data.user);
+                    setUser({
+                        ...data.user,
+                        accessToken: data.accessToken,
+                        createdAt: Date.now()
+                    });
                     navigate('/');
                 } else if (data === 'Email already exists') {
                     throw new Error(data);
