@@ -1,5 +1,5 @@
 import { useState, createContext } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Routes, Route } from 'react-router-dom';
 import { usePaginatedData } from '../../hooks/usePaginatedData';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
@@ -52,7 +52,7 @@ export function App() {
   />
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <AppContext.Provider value={{
         posts,
         theme,
@@ -93,7 +93,7 @@ export function App() {
           </div>
         </div>
       </AppContext.Provider>
-    </BrowserRouter >
+    </HashRouter >
   );
 }
 
