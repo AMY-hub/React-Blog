@@ -23,7 +23,7 @@ export const SighInForm: React.FC = () => {
 
     const navigate = useNavigate();
 
-    const handleSubmit: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
 
@@ -40,7 +40,7 @@ export const SighInForm: React.FC = () => {
                 <label>
                     <p>Enter your email:</p>
                     <input
-                        onChange={handleSubmit}
+                        onChange={handleChange}
                         type='email'
                         name='email'
                         required />
@@ -48,7 +48,7 @@ export const SighInForm: React.FC = () => {
                 <label>
                     <p>Enter your password:</p>
                     <input
-                        onChange={handleSubmit}
+                        onChange={handleChange}
                         type='password'
                         name='password'
                         required

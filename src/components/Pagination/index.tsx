@@ -6,8 +6,8 @@ interface IPaginationProps {
     currentPage: number,
     pagesCount: number,
     setPage: (n: number) => void,
-    getNextPage: () => void;
-    getPrevPage: () => void;
+    getNextPage: () => void,
+    getPrevPage: () => void,
 }
 
 export const Pagination: React.FC<IPaginationProps> = ({ currentPage, pagesCount, setPage, getNextPage, getPrevPage }) => {

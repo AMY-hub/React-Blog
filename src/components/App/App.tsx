@@ -1,5 +1,5 @@
 import { useState, createContext } from 'react';
-import { BrowserRouter, HashRouter, Routes, Route } from 'react-router-dom';
+import { HashRouter, Routes, Route } from 'react-router-dom';
 import { usePaginatedData } from '../../hooks/usePaginatedData';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 
